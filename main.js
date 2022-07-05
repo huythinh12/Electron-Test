@@ -37,24 +37,19 @@ function createWindow () {
     }
   })
 
-const NOTIFICATION_TITLE = 'Basic Notification'
-const NOTIFICATION_BODY = 'Notification from the Main process'
-  
-function showNotification () {
-  new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY }).show()
-}
 
 app.whenReady().then(() => {
-console.log("xong roi ne")
-setTimeout(() => {
-  showNotification()
-}, (3000));
+
+
+// setTimeout(() => {
+//   showNotification()
+// }, (3000));
 })
   // Load index.html into the new BrowserWindow
 mainWindow.loadFile('index.html')
 
   // Open DevTools - Remove for PRODUCTION!
-  // mainWindow.webContents.openDevTools(); // dùng để mở devtool của chromium dc gọi là cửa sổ inspector 
+  mainWindow.webContents.openDevTools(); // dùng để mở devtool của chromium dc gọi là cửa sổ inspector 
 
   // Listen for window being closed
   mainWindow.on('closed',  () => {
