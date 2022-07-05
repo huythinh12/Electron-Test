@@ -1,15 +1,29 @@
 // Modules
-const {app, BrowserWindow,Menu, Tray} = require('electron')
-
+const {app, BrowserWindow,Menu, Tray,Notification } = require('electron')
+//SEVER
+require('./sever/sever.js')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
+const contextMenu = Menu.buildFromTemplate([
+  { label: 'open' },
+  { label: 'setting' },
+  { label: 'exit', role: 'quit'},
+])
+function createTray(){
+  // let tray = null
+  tray = new Tray('Centaur.ico')
+ 
+  tray.setToolTip('This is my thinhnguyen - application')
+
+  tray.setContextMenu(contextMenu)
+}
 // Create a new BrowserWindow when `app` is ready
 function createWindow () {
 
   console.log('Create Window');
-
+  createTray()
   mainWindow = new BrowserWindow({
     width: 1000, height: 800,
     frame: true,
@@ -23,21 +37,21 @@ function createWindow () {
     }
   })
 
+const NOTIFICATION_TITLE = 'Basic Notification'
+const NOTIFICATION_BODY = 'Notification from the Main process'
+  
+function showNotification () {
+  new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY }).show()
+}
 
-let tray = null
 app.whenReady().then(() => {
-  //add your path
-  tray = new Tray(path.join(app.getAppPath(), 'src', 'assets', 'Centaur.jpg'))
-  const contextMenu = Menu.buildFromTemplate([
-    { label: 'Item1', type: 'radio' },
-    { label: 'Item2', type: 'radio' },
-    { label: 'Item3', type: 'radio', checked: true },
-  ])
-  tray.setToolTip('This is my application.')
-  tray.setContextMenu(contextMenu)
+console.log("xong roi ne")
+setTimeout(() => {
+  showNotification()
+}, (3000));
 })
   // Load index.html into the new BrowserWindow
-  mainWindow.loadFile('index.html')
+mainWindow.loadFile('index.html')
 
   // Open DevTools - Remove for PRODUCTION!
   // mainWindow.webContents.openDevTools(); // dùng để mở devtool của chromium dc gọi là cửa sổ inspector 
@@ -46,20 +60,14 @@ app.whenReady().then(() => {
   mainWindow.on('closed',  () => {
     mainWindow = null
   })
+
 }
 
 // Electron `app` is ready
 app.on('ready', ()=>{
   console.log(app.getAppPath())
-  tray = new Tray('Centaur.ico')
-  tray.setToolTip('Tray for electron js')
-  let template = [
-    { label: 'Item1', type: 'radio' },
-    { label: 'Item2', type: 'radio' },
-    { label: 'Item3', type: 'radio', checked: true },]
-  let contextMenu = Menu.buildFromTemplate(template)
-  tray.setContextMenu(contextMenu)
   createWindow()
+
 })
 
 // Quit when all windows are closed - (Not macOS - Darwin)
@@ -71,3 +79,5 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   if (mainWindow === null) createWindow()
 })
+
+
