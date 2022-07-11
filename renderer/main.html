@@ -2,29 +2,60 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- !! IMPORTANT !! -->
     <!-- Content-Security-Policy no longer required. Will show warning in devtools. Can be ignored -->
     <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'"> -->
     <title>Readit</title>
+
+    <!-- define bootstrap  -->
+    <link rel="stylesheet" href="./bootstrap-5.2.0-beta1-dist/css/bootstrap.min.css"> 
+
     <link rel="stylesheet" href="main.css">
   </head>
   <body>
-
     <header>
       <button id="show-modal">+</button>
       <input type="text" id="search" placeholder="Search">
     </header>
 
-    <main>
-      <p id="no-items">No Items</p>
-      <div id="items"></div>
-    </main>
+    <div class="container-fluid">
+      <div class="row">
+
+        <main class="col-md-4 col-sm-4">
+          <h3 id="no-items">No Items</h3>
+          <div id="items"></div>
+        </main>
+        <div class="col-md-8 col-sm-8">
+          <h3 class="text-center">Settings</h3>
+
+          <div class="form-check">
+            <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>
+            <p style="padding-top: 6px;">Default Notification</p> 
+            <label class="form-check-label" for="radio1"></label>
+          </div>
+          <div class="form-check">
+            <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">
+            <p style="padding-top: 6px;">Custom Notification</p> 
+            <label class="form-check-label" for="radio2"></label>
+          </div>
+
+        </div>
+          
+      </div>
+    </div>
+   
 
     <div id="modal">
       <input type="text" id="url" placeholder="Enter URL">
       <button id="add-item">Add Item</button>
       <button id="close-modal">Cancel</button>
     </div>
+
+    <!-- define bootstrap  -->
+    <script src="./bootstrap-5.2.0-beta1-dist/css/boostrap.min"></script>
+    <script src="./bootstrap-5.2.0-beta1-dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
       // You can also require other files to run in this process

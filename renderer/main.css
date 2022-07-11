@@ -58,10 +58,10 @@ main {
   font-weight: bold;
   color: silver;
   text-align: center;
-  width: 100%;
-  position: absolute;
-  top: 100px;
   z-index: -1;
+  position: absolute;
+  left: 10%;
+  top: 80px;
 }
 
 #modal {
@@ -103,7 +103,7 @@ main {
   align-content: center;
   border-bottom: lightgray 2px solid;
   background: #FAFAFA;
-  padding: 10px;
+  /* padding: 10px; */
   border-left: 10px solid lightgray;
   -webkit-user-select: none;
 }
@@ -119,4 +119,8 @@ main {
 .read-item img {
   width: 20%;
   margin-right: 25px;
+}
+
+#left-side{
+
 }

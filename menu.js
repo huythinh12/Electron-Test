@@ -59,7 +59,7 @@ module.exports = appWin => {
         {
           label: 'Learn more',
           click: () => {
-            shell.openExternal('https://github.com/stackacademytv/master-electron')
+            shell.openExternal('https://github.com/huythinh12')
           }
         }
       ]

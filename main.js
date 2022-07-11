@@ -3,6 +3,7 @@ const {app, BrowserWindow, ipcMain,Menu,Tray} = require('electron')
 const windowStateKeeper = require('electron-window-state')
 const readItem = require('./readItem')
 const appMenu = require('./menu')
+const e = require('express')
 
 require("./sever/sever")
 // Keep a global reference of the window object, if you don't, the window will
@@ -14,17 +15,11 @@ const contextMenu = Menu.buildFromTemplate([
   { label: 'setting' },
   { label: 'exit', role: 'quit'},
 ])
-function createTray(){
 
-
-  
+function createTray(){  
     tray = new Tray('duck.ico')
-
     tray.setToolTip('This is my thinhnguyen - application')
-
     tray.setContextMenu(contextMenu)
-  
-  
 }
 
 // Listen for new item request
@@ -42,13 +37,13 @@ function createWindow () {
   createTray()
   // Win state keeper
   let state = windowStateKeeper({
-    defaultWidth: 500, defaultHeight: 650
+    defaultWidth: 400, defaultHeight: 650
   })
 
   mainWindow = new BrowserWindow({
     x: state.x, y: state.y,
     width: state.width, height: state.height,
-    minWidth: 350, maxWidth: 650, minHeight: 300,
+    minWidth: 500, minHeight: 300,
     webPreferences: {
       // --- !! IMPORTANT !! ---
       // Disable 'contextIsolation' to allow 'nodeIntegration'
@@ -71,10 +66,18 @@ function createWindow () {
   mainWindow.webContents.openDevTools();
 
   // Listen for window being closed
-  mainWindow.on('closed',  () => {
-    mainWindow = null
-    tray = null
+  mainWindow.onbeforeunload = (e) =>{
+    e.preventDefault()
+    mainWindow.hide()
+  }
 
+  mainWindow.on('closed',  (e) => {
+    // mainWindow = null
+    // tray = null
+   
+    console.log('Window hiddnen')
+    return false
+    // mainWindow.hide()
   })
 }
 
